@@ -166,6 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     flippedCardIds.push(cardFlippedId);
     flippedCards.push(cardFlipped.children[0].getAttribute('src'));
+
+    // add function to restart game
+    function restart() {
+      console.log('restart game?')
+    }
+
+    if (score === cardData.length / 2) {
+      restart();
+    }
     
     if (flippedCards.length === 2) {
       boardLocked = true;
@@ -174,14 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstCardId = flippedCardIds[0];
         const secondCardId = flippedCardIds[1];
         const scoreSpan = document.querySelector('span');
-        console.log(score)
+        
         // prevent user from clicking on same card twice
         if (firstCardId === secondCardId) {
           return;
         } else if (flippedCards[0] === flippedCards[1]) {
          cards[firstCardId].removeEventListener('click', handleCardClick);
          cards[secondCardId].removeEventListener('click', handleCardClick);
-         score += 2;
+         score++;
          scoreSpan.innerHTML = score; 
         } else {
           // cards dont match, flip them back over
